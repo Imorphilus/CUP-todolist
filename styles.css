@@ -1,0 +1,488 @@
+/* Base Styles */
+:root {
+    --main-color: #5d4037; /* Coffee brown */
+    --accent-color: #8d6e63; /* Lighter brown */
+    --bg-color: #f5f5f5;
+    --light-accent: #d7ccc8; /* Very light brown */
+    --text-color: #333;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --deleted-color: #f44336;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* App Container */
+.app-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.screen {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Typography */
+h1 {
+    color: var(--main-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+h4 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: var(--accent-color);
+}
+
+/* User Selection Screen */
+.user-list {
+    margin-top: 30px;
+}
+
+#user-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.user-button {
+    background-color: white;
+    border: 2px solid var(--light-accent);
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.user-button:hover {
+    background-color: var(--light-accent);
+    transform: translateY(-2px);
+}
+
+/* Task Screen */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#current-user {
+    margin: 5px 0;
+}
+
+.help-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.help-button:hover {
+    background-color: var(--main-color);
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.tab-button {
+    flex: 1;
+    background-color: var(--light-accent);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.filter-controls label {
+    margin-right: 10px;
+}
+
+.filter-controls select {
+    flex: 1;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Task List */
+.task-list-header {
+    display: flex;
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px 5px;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+}
+
+.task-row {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 10px 5px;
+    align-items: center;
+}
+
+.task-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.task-row.finished {
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.task-row.dropped {
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.col {
+    text-align: center;
+    padding: 0 5px;
+}
+
+/* Updated column widths for the new order */
+.col:nth-child(1) {
+    width: 80px; /* Category column */
+}
+
+.col:nth-child(2), 
+.col:nth-child(3),
+.col:nth-child(4) {
+    width: 40px; /* C, U, P columns */
+}
+
+.task-col {
+    flex: 1;
+    text-align: left;
+}
+
+.col:nth-child(6) {
+    width: 80px; /* Status column */
+}
+
+.col:nth-child(7) {
+    width: 100px; /* Actions column */
+}
+
+/* Buttons */
+.action-button {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+.action-button:hover {
+    background-color: var(--accent-color);
+}
+
+.small-button {
+    background-color: var(--light-accent);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.small-button:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.save-button {
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cancel-button {
+    background-color: #ccc;
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.edit-button, .finish-button, .drop-button {
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 0 2px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.edit-button {
+    background-color: #2196F3;
+    color: white;
+}
+
+.finish-button {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.drop-button {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+/* Task status indicators */
+.status {
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-active {
+    background-color: #2196F3;
+    color: white;
+}
+
+.status-finished {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.status-dropped {
+    background-color: var(--deleted-color);
+    color: white;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Categories Management */
+#categories-list {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+#categories-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.category-actions button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #666;
+    margin-left: 5px;
+}
+
+.category-actions button:hover {
+    color: var(--main-color);
+}
+
+.add-task-container, .manage-categories {
+    margin-top: 20px;
+}
+
+.note {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+/* Help text on forms */
+.help-text {
+    font-size: 0.8rem;
+    color: #666;
+    display: block;
+    margin-top: 3px;
+}
+
+/* Help Modal Content */
+.help-content {
+    margin-bottom: 20px;
+}
+
+.help-content p {
+    margin-bottom: 10px;
+}
+
+.help-content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+    .app-container {
+        padding: 10px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .task-list-header, .task-row {
+        font-size: 0.9rem;
+    }
+
+    /* Updated column widths for mobile */
+    .col:nth-child(1) {
+        width: 60px; /* Category column */
+    }
+
+    .col:nth-child(2), 
+    .col:nth-child(3),
+    .col:nth-child(4) {
+        width: 30px; /* C, U, P columns */
+    }
+
+    .col:nth-child(6) {
+        width: 60px; /* Status column */
+    }
+
+    .col:nth-child(7) {
+        width: 90px; /* Actions column */
+    }
+
+    .edit-button, .finish-button, .drop-button {
+        padding: 4px;
+        font-size: 0.7rem;
+    }
+}

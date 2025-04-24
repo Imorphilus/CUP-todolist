@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUP - Task Prioritization</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Web App Manifest for Mobile Icon -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="cup-icon.png">
+    <link rel="apple-touch-icon" href="cup-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="CUP App">
+</head>
+<body>
+    <div class="app-container">
+        <!-- User Selection Screen -->
+        <div id="user-selection" class="screen">
+            <h1>☕ CUP</h1>
+            <h2>Welcome to your daily task prioritization</h2>
+            <div class="user-list">
+                <h3>Select your profile:</h3>
+                <div id="user-buttons">
+                    <!-- User buttons will be added here -->
+                </div>
+                <button id="add-user-btn" class="action-button">+ Add New User</button>
+            </div>
+        </div>
+
+        <!-- Task Management Screen -->
+        <div id="task-screen" class="screen hidden">
+            <div class="header">
+                <h1>☕ CUP</h1>
+                <p id="current-user">Welcome, <span id="username"></span></p>
+                <button id="back-to-users" class="small-button">Change User</button>
+                <button id="help-button" class="help-button" title="Help">?</button>
+            </div>
+
+            <div class="controls">
+                <div class="tabs">
+                    <button id="active-tab" class="tab-button active">Active Tasks</button>
+                    <button id="all-tab" class="tab-button">All Tasks</button>
+                </div>
+                <div class="filter-controls">
+                    <label for="category-filter">Filter by:</label>
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <!-- Categories will be added here -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="task-list-header">
+                <div class="col">Cat.</div>
+                <div class="col">C</div>
+                <div class="col">U</div>
+                <div class="col">P</div>
+                <div class="col task-col">Task</div>
+                <div class="col">Status</div>
+                <div class="col">Actions</div>
+            </div>
+            
+            <div id="task-list">
+                <!-- Tasks will be added here -->
+            </div>
+
+            <div class="add-task-container">
+                <button id="add-task-btn" class="action-button">+ Add New Task</button>
+            </div>
+
+            <div class="manage-categories">
+                <button id="manage-categories-btn" class="small-button">Manage Categories</button>
+            </div>
+        </div>
+
+        <!-- Add Task Modal -->
+        <div id="add-task-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="task-modal-title">Add New Task</h2>
+                <form id="task-form">
+                    <input type="hidden" id="task-id">
+                    <div class="form-group">
+                        <label for="task-description">Task Description:</label>
+                        <input type="text" id="task-description" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-current">C (Currently Important) 1-10:</label>
+                            <input type="number" id="task-current" min="1" max="10" required>
+                            <small class="help-text">How urgent is this task?</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-ultimate">U (Ultimate Important) 1-10:</label>
+                            <input type="number" id="task-ultimate" min="1" max="10" required>
+                            <small class="help-text">How important is this for your long-term goals?</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-category">Category:</label>
+                        <select id="task-category" required>
+                            <!-- Categories will be added here -->
+                        </select>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" id="cancel-task-btn" class="cancel-button">Cancel</button>
+                        <button type="submit" class="save-button">Save Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add User Modal -->
+        <div id="add-user-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Add New User</h2>
+                <form id="user-form">
+                    <div class="form-group">
+                        <label for="new-username">Name:</label>
+                        <input type="text" id="new-username" required>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" id="cancel-user-btn" class="cancel-button">Cancel</button>
+                        <button type="submit" class="save-button">Save User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Manage Categories Modal -->
+        <div id="categories-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Manage Categories</h2>
+                <p class="note">Maximum 5 categories allowed</p>
+                <ul id="categories-list">
+                    <!-- Categories will be listed here -->
+                </ul>
+                <form id="category-form" class="hidden">
+                    <div class="form-group">
+                        <label for="category-name">Category Name:</label>
+                        <input type="text" id="category-name" required>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" id="cancel-category-btn" class="cancel-button">Cancel</button>
+                        <button type="submit" class="save-button">Save Category</button>
+                    </div>
+                </form>
+                <div id="categories-buttons">
+                    <button type="button" id="add-category-btn" class="action-button">+ Add Category</button>
+                    <button type="button" id="close-categories-btn" class="cancel-button">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div id="help-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>CUP App Help</h2>
+                <div class="help-content">
+                    <h3>Understanding the CUP System</h3>
+                    <p>CUP helps you prioritize tasks based on two key factors:</p>
+                    
+                    <h4>C - Currently Important (1-10)</h4>
+                    <p>This measures <strong>urgency</strong> or how pressing a task is right now.</p>
+                    <ul>
+                        <li><strong>1-3:</strong> Low urgency, can wait</li>
+                        <li><strong>4-7:</strong> Moderate urgency, should be done soon</li>
+                        <li><strong>8-10:</strong> High urgency, needs immediate attention</li>
+                    </ul>
+                    
+                    <h4>U - Ultimately Important (1-10)</h4>
+                    <p>This measures <strong>long-term value</strong> or how much this task contributes to your important goals.</p>
+                    <ul>
+                        <li><strong>1-3:</strong> Low impact on long-term goals</li>
+                        <li><strong>4-7:</strong> Moderate impact on long-term goals</li>
+                        <li><strong>8-10:</strong> High impact on long-term goals</li>
+                    </ul>
+                    
+                    <h4>P - Priority</h4>
+                    <p>Automatically calculated as C + U. Tasks are sorted by this value.</p>
+                    
+                    <h4>Daily Use Tip:</h4>
+                    <p>Check your CUP app with your morning coffee to see what deserves your attention today!</p>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" id="close-help-btn" class="cancel-button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
